@@ -7,7 +7,7 @@ lab:
 
 Neste exercício, você aprenderá a migrar um banco de dados do SQL Server para a Instância Gerenciada de SQL do Azure usando o Serviço de Reprodução de Logs. 
 
-Você começará implantando uma Instância Gerenciada de SQL do Azure. Em seguida, usará o Serviço de Reprodução de Log para executar uma migração online de um banco de dados do SQL Server para a Instância Gerenciada de SQL do Azure usando o LRS (Serviço de Reprodução de Log). Você também aprenderá a monitorar o processo de migração no PowerShell.
+Você começará implantando uma Instância Gerenciada de SQL do Azure. Em seguida, usará o Serviço de Reprodução de Log para executar uma migração online de um banco de dados do SQL Server para a Instância Gerenciada de SQL do Azure. Você também aprenderá a monitorar o processo de migração no PowerShell.
 
 Este exercício levará, aproximadamente, **45** minutos.
 
