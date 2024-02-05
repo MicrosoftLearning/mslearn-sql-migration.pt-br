@@ -36,19 +36,19 @@ Vamos restaurar o banco de dados do *AdventureWorksLT* na instância do SQL Serv
 
 1. Selecione a pasta**Bancos de Dados** e **Nova Consulta**.
 
-1. Na janela Nova consulta, copie e cole o T-SQL abaixo. Execute a consulta para restaurar o banco de dados.
+1. Na janela Nova consulta, copie e cole o T-SQL abaixo. Certifique-se de que o nome e o caminho do arquivo de backup do banco de dados correspondam ao arquivo de backup real. Se isso não acontecer, o comando falhará. Execute a consulta para restaurar o banco de dados.
 
     ```sql
     RESTORE DATABASE AdventureWorksLT
-    FROM DISK = 'C:\LabFiles\AdventureWorksLT2019.bak'
+    FROM DISK = 'C:\<FolderName>\AdventureWorksLT2019.bak'
     WITH RECOVERY,
           MOVE 'AdventureWorksLT2019_Data' 
-            TO 'C:\LabFiles\AdventureWorksLT2019.mdf',
+            TO 'C:\<FolderName>\AdventureWorksLT2019.mdf',
           MOVE 'AdventureWorksLT2019_Log'
-            TO 'C:\LabFiles\AdventureWorksLT2019.ldf';
+            TO 'C:\<FolderName>\AdventureWorksLT2019.ldf';
     ```
 
-    > **Observação**: certifique-se de que o nome e o caminho do arquivo de backup do banco de dados no exemplo acima correspondam ao arquivo de backup real. Caso contrário, o comando poderá falhar.
+    > **Observação**: Certifique-se de que você tenha o arquivo de backup leve [AdventureWorks](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files) no computador do SQL Server antes de executar o comando T-SQL.
 
 1. Uma mensagem de sucesso será exibida após a conclusão da restauração.
 
