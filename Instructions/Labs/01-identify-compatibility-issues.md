@@ -27,7 +27,7 @@ Para fazer este exercício, verifique se você cumpre os seguintes pré-requisit
 
 1. Selecione a pasta**Bancos de Dados** e **Nova Consulta**.
 
-1. Na janela Nova consulta, copie e cole o T-SQL abaixo. Certifique-se de que o nome e o caminho do arquivo de backup do banco de dados correspondam ao arquivo de backup real. Caso contrário, o comando falhará. Execute a consulta para restaurar o banco de dados.
+1. Na janela Nova consulta, copie e cole o T-SQL abaixo. Certifique-se de que o nome e o caminho do arquivo de backup do banco de dados correspondam ao arquivo de backup real. Se isso não acontecer, o comando falhará. Execute a consulta para restaurar o banco de dados.
 
     ```sql
     RESTORE DATABASE AdventureWorksLT
@@ -79,21 +79,19 @@ Execute a extensão de migração do Azure para o Azure Data Studio, em seguida 
 
 1. Na **Etapa 1: Bancos de dados para avaliação**, selecione o banco de dados *AdventureWorks* e escolha **Avançar**.
 
-1. Na **Etapa 2: Resultados e recomendações da avaliação**, aguarde a conclusão da avaliação.
+1. Na **Etapa 2: Resultados da avaliação e recomendações de SKU**, aguarde a conclusão da avaliação e selecione **Avançar**.
 
 ## Examinar os resultados da avaliação
 
 Agora você pode analisar as recomendações geradas pela extensão de migração.
 
-1. Na **Etapa 2: resultados e recomendações da avaliação**, selecione **Banco de Dados SQL do Azure** como plataforma de destino.
-
-1. Na parte inferior da página, selecione **Exibir/Selecionar** para ver os resultados da avaliação. 
+1. Na **Etapa 3: Plataforma de destino e resultados de avaliação**, selecione o **Banco de Dados SQL do Azure** como a plataforma de destino.
 
 1. Escolha o banco de dados *AdventureWorks*. Reserve um momento para analisar os resultados da avaliação no lado direito.
     
     > **Observação**: podemos ver que a coluna `Next` adicionada anteriormente foi sinalizada, pois ela pode resultar em um erro no Banco de Dados SQL do Azure.
 
-1. Selecione **Cancelar** e escolha **Instância Gerenciada de SQL do Azure** como a plataforma de destino **SQL do Azure**.
+1. Escolha **Instância Gerenciada de SQL do Azure** como a plataforma de destino do **Banco de Dados SQL do Azure**.
     
     > **Observação**: a coluna `Next` não está mais sinalizada na Instância Gerenciada de SQL do Azure. Por quê? 
     >
@@ -111,12 +109,12 @@ Agora você pode analisar as recomendações geradas pela extensão de migraçã
     ALTER TABLE [SalesLT].[Customer] DROP COLUMN [Next];
     ```
 
-1. Volte para a página da **Etapa 2: resultados e recomendações da avaliação** no assistente e selecione **Atualizar avaliação**.
+1. Volte para a **Etapa 2: Página de resultados da avaliação e recomendações de SKU** no assistente e selecione **Atualizar avaliação**.
 
-1. Selecione o **Banco de Dados SQL do Azure** como a plataforma de destino do **SQL do Azure**.
+1. Selecione o **Banco de Dados SQL do Azure** como a plataforma de destino.
 
-1. Selecione **Exibir/Selecionar** para exibir os resultados da avaliação.
+1. Escolha o banco de dados *AdventureWorks*.
 
-    > **Observação:** o problema não está mais sinalizado.
+    > **Observação:** O banco de dados está pronto para migrar.
 
 Você aprendeu a avaliar a preparação de um banco de dados do SQL Server para migração para o Banco de Dados SQL do Azure. Ao resolver problemas de compatibilidade e fazer alterações de esquema essenciais ou relatá-las, você deu um passo importante na mitigação de possíveis problemas técnicos que podem surgir no futuro no Banco de Dados SQL do Azure.
