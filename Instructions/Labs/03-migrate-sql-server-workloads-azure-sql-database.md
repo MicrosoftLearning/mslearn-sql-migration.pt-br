@@ -150,36 +150,6 @@ Siga estas etapas para instalar a extensão de migração. Se a extensão já es
 
     > **Observação**: se a **Migração SQL do Azure** não estiver visível na barra lateral do painel do servidor, reabra o Azure Data Studio.
  
-## Gerar o esquema de banco de dados com o AMD
-
-Antes de começarmos a migração, precisamos verificar se o esquema existe no banco de dados de destino. Usaremos o AMD para criar o esquema a partir da origem e aplicá-lo ao destino.
-
-1. Feche o Assistente de Migração de Dados.
-
-1. Crie um novo projeto de migração, defina o tipo de origem como **SQL Server**, o tipo de servidor de destino como **Banco de Dados SQL do Azure** e o escopo da migração para **Somente esquema**. Selecione **Criar**.
-
-    ![Captura de tela mostrando como iniciar um novo projeto de migração no Assistente de Migração de Dados.](../media/3-data-migration-schema.png) 
-
-1. Na guia **Selecionar origem**, insira o nome da instância do SQL Server de origem e selecione **Autenticação do Windows** para **Tipo de autenticação**. Desmarque **Criptografar conexão**. 
-
-1. Selecione **Conectar**.
-
-1. Selecione o banco de dados do **AdventureWorksLT** e, em seguida, selecione **Avançar**.
-
-1. Na guia **Selecionar destino**, insira o nome do SQL Server do Azure de destino, selecione **Autenticação do SQL Server** para **Tipo de Autenticação** e forneça as credenciais de usuário do SQL. 
-
-1. Selecione o banco de dados do **AdventureWorksLT** e, em seguida, selecione **Avançar**.
-
-1. Na guia **Selecionar objetos**, selecione todos os objetos de esquema do banco de dados de origem. Selecione **Gerar script SQL**. 
-
-    ![Captura de tela mostrando a guia "Selecionar objetos" no Assistente de Migração de Dados.](../media/3-data-migration-generate.png)
-
-1. Depois que o esquema tiver sido gerado, reserve algum tempo para revisá-lo. Geralmente, essa etapa envolve fazer os ajustes necessários no script para objetos que não podem ser criados, em seu estado atual, no local de destino, o que não é o caso neste cenário.
- 
-1. Você pode executar o script manualmente usando o Azure Data Studio, o SQL Management Studio ou selecionando **Implantar esquema**. Prossiga com um dos métodos.
-
-    ![Captura de tela mostrando o script gerado no Assistente de Migração de Dados.](../media/3-data-migration-script.png)
-
 ## Execute uma migração offline de um banco de dados do SQL Server para um Banco de Dados SQL do Azure.
 
 Agora estamos prontos para migrar os dados. Para executar uma migração offline usando o Azure Data Studio, siga estas etapas.
@@ -188,21 +158,23 @@ Agora estamos prontos para migrar os dados. Para executar uma migração offline
 
 1. Na **Etapa 1: Bancos de dados para avaliação**, selecione o banco de dados *AdventureWorks* e escolha **Avançar**.
 
-1. Na **Etapa 2: resultados e recomendações da avaliação**, aguarde pela conclusão da avaliação e, em seguida, selecione o **Banco de Dados SQL do Azure** como o destino do **SQL do Azure**.
+1. Na **Etapa 2: Resumo da avaliação e recomendações de SKU**, aguarde a conclusão da avaliação e examine os resultados. Selecione **Avançar**.
 
-1. Na parte inferior da página **Etapa 2: resultados e recomendações da avaliação**, selecione **Exibir/selecionar** para exibir os resultados da avaliação. Selecione o banco de dados para migrar.
+1. Na **Etapa 3: Plataforma de destino e resultados da avaliação**, selecione o banco de dados para ver as conclusões da avaliação.
 
     > **Observação**: reserve um momento para analisar os resultados da avaliação no lado direito.
 
-1. Na **Etapa 3: destino do SQL do Azure**, se a conta ainda não estiver vinculada, certifique-se de adicionar uma conta selecionando o link **Vincular conta**. Em seguida, selecione a conta do Azure, o locatário do AD, a assinatura, o local, o grupo de recursos, o servidor do Banco de Dados SQL do Azure e as credenciais do Banco de Dados SQL do Azure.
+1. Na parte superior da **Etapa 3: Na página Plataforma de destino e resultados da avaliação**, selecione **Banco de Dados SQL do Azure** como o destino do **SQL do Azure**.
+
+1. Na **Etapa 4: Destino do SQL do Azure**, se a conta ainda não estiver vinculada, adicione uma conta selecionando o link **Vincular conta**. Em seguida, selecione a conta do Azure, o locatário do AD, a assinatura, o local, o grupo de recursos, o servidor do Banco de Dados SQL do Azure e as credenciais do Banco de Dados SQL do Azure.
 
 1. Selecione **Conectar** e, em seguida, selecione o banco de dados *AdventureWorks* como o **Banco de dados de destino**. Selecione **Avançar**.
 
-1. Na **Etapa 4: Serviço de Migração de Banco de Dados do Azure**, selecione o link **Criar novo** para criar um novo Serviço de Migração de Banco de Dados do Azure usando o assistente. Siga as etapas fornecidas pelo assistente para configurar um novo runtime de integração auto-hospedado. Se você já criou um anteriormente, pode reutilizá-lo.
+1. Na **Etapa 5: Serviço de Migração de Banco de Dados do Azure**, selecione o link **Criar novo** para criar um novo Serviço de Migração de Banco de Dados do Azure usando o assistente. Siga as etapas fornecidas pelo assistente para configurar um novo runtime de integração auto-hospedado. Se você já criou um anteriormente, pode reutilizá-lo.
 
-1. Na **Etapa 5: configuração da fonte de dados**, insira as credenciais para se conectar à instância do SQL Server a partir do runtime de integração auto-hospedado. 
+1. Na **Etapa 6: Configuração da fonte de dados**, insira as credenciais para se conectar à instância do SQL Server do runtime de integração auto-hospedada. 
 
-1. Selecione as tabelas a serem migradas da origem para o destino. 
+1. Selecione todas as tabelas para migrar de origem para destino e, em seguida, verifique a opção **Migrar esquema ausente**.
 
 1. Selecione **Executar validação**.
 
@@ -210,7 +182,7 @@ Agora estamos prontos para migrar os dados. Para executar uma migração offline
 
 1. Após a validação ser concluída, selecione **Avançar**.
 
-1. Na**Etapa 6: resumo**, selecione **Iniciar migração**.
+1. Na **Etapa 7: Resumo**, selecione **Iniciar migração**.
 
 1. Selecione **Migrações de banco de dados em andamento** no painel de migração para exibir o status da migração. 
 
