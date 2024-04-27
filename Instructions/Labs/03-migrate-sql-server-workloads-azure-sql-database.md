@@ -22,7 +22,6 @@ Para executar este exercício, você precisa:
 | **Servidor de origem** | Uma instância do SQL Server 2019 ou [posterior](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) instalada em um servidor de sua preferência. |
 | **Banco de dados de origem** | O banco de dados leve do [AdventureWorks](https://learn.microsoft.com/sql/samples/adventureworks-install-configure) a ser restaurado na Instância do SQL Server. |
 | **Azure Data Studio** | Instale o [Azure Data Studio](https://learn.microsoft.com/sql/azure-data-studio/download-azure-data-studio) no mesmo servidor onde o banco de dados de origem está localizado. Se já estiver instalado, atualize-o para garantir a utilização da versão mais recente. |
-| **Assistente de migração de dados da Microsoft** | Instale o [Assistente de Migração de Dados](https://www.microsoft.com/en-us/download/details.aspx?id=53595) no mesmo servidor em que o banco de dados de origem está localizado. |
 | Provedor de recursos **Microsoft.DataMigration** | Certifique-se de que a assinatura esteja registrada para usar o namespace **Microsoft.DataMigration** Para saber como realizar o registro de um provedor de recursos, consulte [Registrar o provedor de recursos](https://learn.microsoft.com/azure/dms/quickstart-create-data-migration-service-portal#register-the-resource-provider). |
 | **Microsoft Integration Runtime** | Instale o [Microsoft Integration Runtime](https://aka.ms/sql-migration-shir-download). |
 
@@ -92,11 +91,7 @@ Vamos configurar um Banco de Dados SQL do Azure que servirá como nosso ambiente
 
 1. Em **Computação + armazenamento**, selecione **Configurar banco de dados**. Na página **Configurar**, para a lista suspensa **Camada de serviço**, selecione **Básico** e **Aplicar**.
 
-1. Para a opção **Redundância de armazenamento de backup**, mantenha o valor padrão: **armazenamento de backup com redundância geográfica**. Selecione **Avançar: Rede**.
-
-1. Na guia **Rede**, selecione **Avançar: Segurança** e, em seguida, **Avançar: Configurações adicionais**.
-
-1. Na página **Configurações adicionais**, selecione **Revisar + criar**.
+1. Para a opção **Redundância de armazenamento de backup**, mantenha o valor padrão: **armazenamento de backup com redundância geográfica**. Selecione **Examinar + criar**.
 
 1. Revise as configurações e selecione **Criar**.
 
@@ -156,31 +151,31 @@ Agora estamos prontos para migrar os dados. Para executar uma migração offline
 
 1. Inicie o assistente para **Migrar para o SQL do Azure** na extensão do Azure Data Studio, e em seguida, selecione **Migrar para o SQL do Azure**.
 
-1. Na **Etapa 1: Bancos de dados para avaliação**, selecione o banco de dados *AdventureWorks* e escolha **Avançar**.
+1. Na **Etapa 1: Bancos de dados para avaliação**, selecione o banco de dados *AdventureWorksLT* e selecione **Avançar**.
 
 1. Na **Etapa 2: Resumo da avaliação e recomendações de SKU**, aguarde a conclusão da avaliação e examine os resultados. Selecione **Avançar**.
 
-1. Na **Etapa 3: Plataforma de destino e resultados da avaliação**, selecione o banco de dados para ver as conclusões da avaliação.
+1. Na **Etapa 3: Plataforma de destino e resultados de avaliação**, selecione o **Banco de Dados SQL do Azure** como o tipo de destino. Depois de examinar os resultados da avaliação, selecione **Avançar**.
 
-    > **Observação**: reserve um momento para analisar os resultados da avaliação no lado direito.
+1. Na **Etapa 4: Destino do SQL do Azure**, se a conta ainda não estiver vinculada, adicione uma conta selecionando o link **Vincular conta**. Em seguida, selecione uma conta do Azure, locatário do Microsoft Entra, assinatura, local, grupo de recursos, servidor do Banco de Dados SQL do Azure e credenciais do Banco de Dados SQL do Azure.
 
-1. Na parte superior da **Etapa 3: Na página Plataforma de destino e resultados da avaliação**, selecione **Banco de Dados SQL do Azure** como o destino do **SQL do Azure**.
-
-1. Na **Etapa 4: Destino do SQL do Azure**, se a conta ainda não estiver vinculada, adicione uma conta selecionando o link **Vincular conta**. Em seguida, selecione a conta do Azure, o locatário do AD, a assinatura, o local, o grupo de recursos, o servidor do Banco de Dados SQL do Azure e as credenciais do Banco de Dados SQL do Azure.
-
-1. Selecione **Conectar** e, em seguida, selecione o banco de dados *AdventureWorks* como o **Banco de dados de destino**. Selecione **Avançar**.
+1. Selecione **Conectar** e selecione o banco de dados *AdventureWorksLT* como **Banco de dados de destino**. Selecione **Avançar**.
 
 1. Na **Etapa 5: Serviço de Migração de Banco de Dados do Azure**, selecione o link **Criar novo** para criar um novo Serviço de Migração de Banco de Dados do Azure usando o assistente. Siga as etapas fornecidas pelo assistente para configurar um novo runtime de integração auto-hospedado. Se você já criou um anteriormente, pode reutilizá-lo.
 
-1. Na **Etapa 6: Configuração da fonte de dados**, insira as credenciais para se conectar à instância do SQL Server do runtime de integração auto-hospedada. 
+1. Na **Etapa 6: Configuração da fonte de dados**, insira as credenciais para se conectar à instância do SQL Server do runtime de integração auto-hospedada.
 
-1. Selecione todas as tabelas para migrar de origem para destino e, em seguida, verifique a opção **Migrar esquema ausente**.
+1. Selecione **Editar** para o banco de dados *AdventureWorksLT*. 
+
+1. Verifique a opção **Migrar esquema para destino** e verifique se todas as tabelas na guia **Ausentes no destino** estão selecionadas. Selecione **Atualizar**.
 
 1. Selecione **Executar validação**.
 
     ![Faça uma captura de tela da etapa de execução da validação na extensão de migração do Azure para o Azure Data Studio.](../media/3-run-validation.png) 
 
-1. Após a validação ser concluída, selecione **Avançar**.
+1. Após a conclusão da validação, selecione **Concluído**.
+
+1. Selecione **Avançar**.
 
 1. Na **Etapa 7: Resumo**, selecione **Iniciar migração**.
 
